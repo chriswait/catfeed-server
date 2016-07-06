@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name cat.chriswait.net;
+
+    error_log /var/log/nginx/error.log;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location / {
+        proxy_pass http://localhost:8007;
+    }
+    
+    location /static/admin {
+        autoindex on;
+        alias /home/ubuntu/catfeed-server/venv/lib/python2.7/site-packages/django/contrib/admin/static/admin;
+    }
+}
