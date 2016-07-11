@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.http import HttpResponse
 from .models import Feed
 
-from slack import post_to_slack
+from slack import post_to_slack_with_datetime
 
 recent = timedelta(seconds=10)
 
@@ -37,7 +37,7 @@ def add_feed(request):
     feed.save()
 
     # post message to slack
-    slack_response = post_to_slack()
+    slack_response = post_to_slack_with_datetime(now)
     if (slack_response is not None):
         return HttpResponse(slack_response)
     else:
