@@ -2,9 +2,9 @@ import requests
 import json
 from django.utils import timezone
 
-url = "https://hooks.slack.com/services/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"
+url = "https://hooks.slack.com/services/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"
 def post_to_slack_with_datetime(now):
-    imgRequest = requests.post("http://thecatapi.com/api/images/get?format=src&type=gif")
+    imgRequest = requests.post("http://thecatapi.com/api/images/get?format=src&type=gif&size=med")
     imgRedirect = imgRequest.url
 
     time_string = timezone.localtime(now).strftime("%H:%M")
