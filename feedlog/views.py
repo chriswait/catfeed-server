@@ -1,6 +1,6 @@
 from django.utils import timezone
 from datetime import timedelta
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Feed
 
 from slack import post_to_slack_with_datetime
@@ -42,3 +42,11 @@ def add_feed(request):
         return HttpResponse(slack_response)
     else:
         return HttpResponse("Success")
+
+def feeds(request):
+    feeds = Feed.objects.all().order_by("feed_date")
+    feed_times = {
+        "feed_times": [timezone.localtime(feed.feed_date) for feed in feeds]
+    }
+    response = JsonResponse(feed_times)
+    return response
