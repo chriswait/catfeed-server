@@ -8,7 +8,7 @@ def post_to_slack_with_datetime(now):
     imgRedirect = imgRequest.url
 
     time_string = timezone.localtime(now).strftime("%H:%M")
-    timestamp_url = "http://timestamp.chriswait.net/"+time_string
+    timestamp_url = "http://cat.chriswait.net/timestamp/"+time_string
 
     data = {
         'username': "Lady",

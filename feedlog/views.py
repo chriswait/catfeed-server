@@ -1,9 +1,11 @@
 from django.utils import timezone
 from datetime import timedelta
 from django.http import HttpResponse, JsonResponse
-from .models import Feed
+from StringIO import StringIO
 
-from slack import post_to_slack_with_datetime
+from .models import Feed
+from .timestamp import drawTimestamp
+from .slack import post_to_slack_with_datetime
 
 recent = timedelta(seconds=10)
 
@@ -50,3 +52,10 @@ def feeds(request):
     }
     response = JsonResponse(feed_times)
     return response
+
+def timestamp(request, timestamp):
+    response = HttpResponse(content_type="image/png")
+    img = drawTimestamp(timestamp)
+    img.save(response, "PNG")
+    return response
+
